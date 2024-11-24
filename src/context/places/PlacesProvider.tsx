@@ -2,7 +2,9 @@
 El estado es lo que nosotros guardamos en memoria
 */
 
+import { useReducer } from "react";
 import { PlacesContext } from "./PlacesContext";
+import { placesReducer } from "./placesReducer";
 
 export interface PlacesState {
     isLoading: boolean;
@@ -19,10 +21,12 @@ const INITIAL_STATE: PlacesState = {
 }
 
 export const PlacesProvider = ({children}: Props) => {
+
+  const [state, dispatch] = useReducer(placesReducer, INITIAL_STATE)  
+
   return (
     <PlacesContext.Provider value={{
-        isLoading: true,
-        userLocation: undefined
+        ...state,
     }}>
         {children}
     </PlacesContext.Provider>
