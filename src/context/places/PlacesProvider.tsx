@@ -2,9 +2,10 @@
 El estado es lo que nosotros guardamos en memoria
 */
 
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { PlacesContext } from "./PlacesContext";
 import { placesReducer } from "./placesReducer";
+import { getUserLocation } from "../../helpers";
 
 export interface PlacesState {
     isLoading: boolean;
@@ -23,6 +24,16 @@ const INITIAL_STATE: PlacesState = {
 export const PlacesProvider = ({children}: Props) => {
 
   const [state, dispatch] = useReducer(placesReducer, INITIAL_STATE)  
+
+  useEffect(() => {
+
+    console.log(getUserLocation().then(
+        (location) => {
+            dispatch({type: "setUserLocation", payload: location})
+            }
+    )) 
+    //dispatch({ type: "setUserLocation"; payload: navigator.geolocation });
+  }, []);
 
   return (
     <PlacesContext.Provider value={{
