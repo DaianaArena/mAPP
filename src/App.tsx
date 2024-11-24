@@ -4,7 +4,7 @@ import Mapp from "./Mapp";
 function App() {
   return (
     <div className="App">
-      <Mapp/>
+      <Mapp />
     </div>
   );
 }
