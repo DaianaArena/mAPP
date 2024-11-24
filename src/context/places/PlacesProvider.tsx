@@ -27,11 +27,11 @@ export const PlacesProvider = ({children}: Props) => {
 
   useEffect(() => {
 
-    console.log(getUserLocation().then(
+   getUserLocation().then(
         (location) => {
             dispatch({type: "setUserLocation", payload: location})
             }
-    )) 
+    ) 
     //dispatch({ type: "setUserLocation"; payload: navigator.geolocation });
   }, []);
 
